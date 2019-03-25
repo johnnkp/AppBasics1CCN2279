@@ -2,6 +2,7 @@ package hkcc.ccn2279.appbasics1;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
@@ -78,7 +79,15 @@ public class MainActivity extends AppCompatActivity {
 
         Toast toast = Toast.makeText(getApplicationContext(),
                 "You have pressed " + str + "!", Toast.LENGTH_LONG);
-        toast.setGravity(Gravity.CENTER, 0, 0);
+        Configuration config = getResources().getConfiguration();
+
+        // Checks the orientation of the screen
+        if (config.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            toast.setGravity(Gravity.CENTER, 0, 180);
+        } else if (config.orientation == Configuration.ORIENTATION_PORTRAIT) {
+            toast.setGravity(Gravity.CENTER, 0, 0);
+        }
+
         toast.show();
     }
 
