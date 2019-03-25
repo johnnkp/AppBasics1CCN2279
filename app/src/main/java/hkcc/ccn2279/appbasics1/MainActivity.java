@@ -3,6 +3,10 @@ package hkcc.ccn2279.appbasics1;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.res.Configuration;
+import android.content.res.TypedArray;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
@@ -67,9 +71,13 @@ public class MainActivity extends AppCompatActivity {
     };
 
     private void display(String s) {
+        Drawable ic_launcher = getResources().getDrawable(R.drawable.ic_launcher);
+        Bitmap ic = ((BitmapDrawable) ic_launcher).getBitmap();
+        Drawable icon = new BitmapDrawable(getResources(), Bitmap.createScaledBitmap(ic, getActionBarSize(), getActionBarSize(), true));
+
         new AlertDialog.Builder(MainActivity.this)
                 .setTitle("Dialog Box")
-                .setIcon(R.drawable.ic_launcher)
+                .setIcon(icon)
                 .setMessage("You have pressed " + str + "!\nPlease press Okay to close this dialog")
                 .setPositiveButton("Okay", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialoginterface, int i) {
@@ -89,6 +97,14 @@ public class MainActivity extends AppCompatActivity {
         }
 
         toast.show();
+    }
+
+    // http://blog.moagrius.com/android/android-get-system-defined-actionbar-size-height
+    public int getActionBarSize() {
+        TypedArray styledAttributes = getTheme().obtainStyledAttributes(new int[]{android.R.attr.actionBarSize});
+        int actionBarSize = (int) styledAttributes.getDimension(0, 0);
+        styledAttributes.recycle();
+        return actionBarSize;
     }
 
     @Override
