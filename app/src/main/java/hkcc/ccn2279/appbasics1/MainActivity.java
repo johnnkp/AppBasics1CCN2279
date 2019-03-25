@@ -4,9 +4,11 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     private Button btnN1, btnN2, btnN3, btnN4, btnN5, btnN6;
@@ -73,6 +75,11 @@ public class MainActivity extends AppCompatActivity {
                     }
                 })
                 .show();
+
+        Toast toast = Toast.makeText(getApplicationContext(),
+                "You have pressed " + str + "!", Toast.LENGTH_LONG);
+        toast.setGravity(Gravity.CENTER, 0, 0);
+        toast.show();
     }
 
     @Override
